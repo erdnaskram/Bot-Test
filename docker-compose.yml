@@ -1,0 +1,22 @@
+---
+version: "3"
+services:
+  in-stock-bot:
+    build: .
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    volumes:
+       - "./data:/app/data:rw"
+    environment:
+      - UID=1000 
+      - GID=1000
+      - LINK=
+      - API_Key=
+      - expected=4
+      - unavailabilityMessage=DERZEIT NICHT VERFÜGBAR
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
